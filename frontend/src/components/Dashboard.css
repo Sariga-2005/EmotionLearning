@@ -1,0 +1,700 @@
+/* ============================================
+   DASHBOARD.CSS - COMPLETE UPDATED VERSION
+   ============================================ */
+
+/* Add this to your public/index.html in <head>:
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+*/
+
+:root {
+  --primary: #667eea;
+  --secondary: #764ba2;
+  --accent: #FFA502;
+  --success: #26de81;
+  --danger: #ff6b9d;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Page background with animated gradient */
+/* Page background handled by index.css and Layout */
+.dashboard {
+  /* min-height: 100vh; removed */
+  /* background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); removed */
+  /* background-size: 400% 400%; removed */
+  /* animation: gradientShift 15s ease infinite; removed */
+  padding: 20px;
+  font-family: 'Poppins', sans-serif;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.dashboard::before,
+.dashboard::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.1;
+  animation: float 20s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.dashboard::before {
+  width: 300px;
+  height: 300px;
+  background: white;
+  top: -100px;
+  left: -100px;
+}
+
+.dashboard::after {
+  width: 400px;
+  height: 400px;
+  background: white;
+  bottom: -150px;
+  right: -150px;
+  animation-delay: -10s;
+}
+
+@keyframes gradientShift {
+
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-20px) rotate(5deg);
+  }
+}
+
+/* Header */
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  padding: 20px 30px;
+  border-radius: 20px;
+  margin-bottom: 30px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+  position: relative;
+  z-index: 10;
+  animation: slideDown 0.6s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.dashboard-header h1 {
+  font-family: 'Fredoka', sans-serif;
+  font-size: 28px;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 0;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.user-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.logout-btn {
+  background: linear-gradient(135deg, #ff6b9d, #c44569);
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(255, 107, 157, 0.3);
+  font-family: 'Poppins', sans-serif;
+}
+
+.logout-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 107, 157, 0.4);
+}
+
+/* Main card */
+.game-card {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  padding: 40px;
+  border-radius: 24px;
+  max-width: 900px;
+  margin: auto;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  position: relative;
+  z-index: 10;
+  animation: scaleIn 0.5s ease-out;
+}
+
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.game-card h2 {
+  font-family: 'Fredoka', sans-serif;
+  font-size: 32px;
+  color: #2d3436;
+  margin-bottom: 10px;
+}
+
+.game-card>p {
+  color: #636e72;
+  font-size: 16px;
+  margin-bottom: 30px;
+}
+
+.emotion-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  /* 👈 FORCE 4 PER ROW */
+  gap: 24px;
+  margin: 30px 0;
+}
+
+
+/* Emotion cards */
+.emotion-card {
+  background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+  padding: 25px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 3px solid transparent;
+  position: relative;
+  overflow: hidden;
+}
+
+/* BIG EMOTION IMAGE */
+.emotion-image {
+  width: 100%;
+  height: 140px;
+  /* controls image height */
+  object-fit: cover;
+  /* ZOOMS image to fill */
+  border-radius: 14px;
+  margin-bottom: 12px;
+}
+
+.emotion-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.emotion-card:hover {
+  transform: translateY(-8px) scale(1.05);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+}
+
+.emotion-card:hover::before {
+  opacity: 1;
+}
+
+.emotion-card.active {
+  border-color: #667eea;
+  background: linear-gradient(135deg, #e6f0ff 0%, #f0e6ff 100%);
+  box-shadow: 0 12px 30px rgba(102, 126, 234, 0.3);
+  transform: scale(1.08);
+}
+
+
+
+.emotion-card:hover .emoji {
+  animation: wiggle 0.5s ease;
+}
+
+@keyframes wiggle {
+
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+
+  25% {
+    transform: rotate(-10deg);
+  }
+
+  75% {
+    transform: rotate(10deg);
+  }
+}
+
+.emotion-card p {
+  font-family: 'Fredoka', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  color: #2d3436;
+  margin: 0;
+}
+
+/* Submit button */
+.submit-btn {
+  padding: 15px 40px;
+  font-size: 18px;
+  font-weight: 600;
+  border-radius: 16px;
+  border: none;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 24px rgba(102, 126, 234, 0.4);
+  font-family: 'Fredoka', sans-serif;
+  margin-top: 20px;
+}
+
+.submit-btn:hover:not(:disabled) {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(102, 126, 234, 0.5);
+}
+
+.submit-btn:active:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+.submit-btn:disabled {
+  background: #dfe6e9;
+  cursor: not-allowed;
+  box-shadow: none;
+  color: #b2bec3;
+}
+
+/* Home container */
+.home-container {
+  text-align: center;
+  position: relative;
+  z-index: 10;
+}
+
+.home-title {
+  font-family: 'Fredoka', sans-serif;
+  font-size: 42px;
+  color: white;
+  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  margin-bottom: 40px;
+  animation: fadeInDown 0.6s ease-out;
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Card grid */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 30px;
+  max-width: 900px;
+  margin: auto;
+}
+
+/* Menu cards */
+.menu-card {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 24px;
+  padding: 40px 30px;
+  font-size: 56px;
+  cursor: pointer;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  animation: fadeInUp 0.6s ease-out backwards;
+}
+
+.menu-card:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.menu-card:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.menu-card:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+.menu-card:nth-child(4) {
+  animation-delay: 0.4s;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.menu-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s ease;
+}
+
+.menu-card:hover::before {
+  left: 100%;
+}
+
+.menu-card:hover {
+  transform: translateY(-12px) scale(1.05);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+}
+
+.menu-card p {
+  font-family: 'Fredoka', sans-serif;
+  font-size: 20px;
+  margin-top: 15px;
+  font-weight: 600;
+  color: #2d3436;
+}
+
+.menu-card.logout {
+  background: linear-gradient(135deg, #ff6b9d, #c44569);
+  color: white;
+}
+
+.menu-card.logout p {
+  color: white;
+}
+
+/* Back button */
+.back-btn {
+  margin-bottom: 20px;
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  color: #667eea;
+  padding: 12px 24px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+}
+
+.back-btn:hover {
+  background: white;
+  transform: translateX(-5px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* Progress bar */
+.progress-container {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  height: 10px;
+  margin: 20px 0;
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #26de81, #20bf6b);
+  border-radius: 10px;
+  transition: width 0.5s ease;
+  box-shadow: 0 2px 10px rgba(38, 222, 129, 0.5);
+}
+
+/* Score display */
+.score-display {
+  font-family: 'Fredoka', sans-serif;
+  font-size: 48px;
+  font-weight: 700;
+  background: linear-gradient(135deg, #f093fb, #f5576c);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 20px 0;
+}
+
+/* Loading spinner */
+.loading-spinner {
+  border: 3px solid rgba(102, 126, 234, 0.3);
+  border-top: 3px solid #667eea;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  margin: 30px auto;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Success message */
+.success-message {
+  background: linear-gradient(135deg, #26de81, #20bf6b);
+  color: white;
+  padding: 20px;
+  border-radius: 16px;
+  margin: 20px 0;
+  font-family: 'Fredoka', sans-serif;
+  font-size: 20px;
+  animation: slideInBounce 0.5s ease-out;
+}
+
+@keyframes slideInBounce {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+
+  60% {
+    transform: translateY(5px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Error message */
+.error-message {
+  background: linear-gradient(135deg, #ff6b9d, #c44569);
+  color: white;
+  padding: 20px;
+  border-radius: 16px;
+  margin: 20px 0;
+  font-family: 'Fredoka', sans-serif;
+  font-size: 18px;
+  animation: shake 0.5s ease;
+}
+
+@keyframes shake {
+
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  25% {
+    transform: translateX(-10px);
+  }
+
+  75% {
+    transform: translateX(10px);
+  }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .dashboard {
+    padding: 15px;
+  }
+
+  .dashboard-header {
+    padding: 15px 20px;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .game-card {
+    padding: 25px;
+  }
+
+  .home-title {
+    font-size: 32px;
+  }
+
+  .emotion-grid {
+    grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+    gap: 15px;
+  }
+
+  .menu-card {
+    padding: 30px 20px;
+    font-size: 48px;
+  }
+
+  .emoji {
+    font-size: 48px;
+  }
+
+  .card-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .dashboard-header h1 {
+    font-size: 22px;
+  }
+
+  .home-title {
+    font-size: 28px;
+  }
+
+  .game-card h2 {
+    font-size: 26px;
+  }
+
+  .menu-card {
+    font-size: 40px;
+    padding: 25px 20px;
+  }
+
+  .menu-card p {
+    font-size: 16px;
+  }
+}
+
+/* Hide scrollbar but keep scrolling */
+.dashboard {
+  scrollbar-width: none;
+  /* Firefox */
+}
+
+.dashboard::-webkit-scrollbar {
+  display: none;
+  /* Chrome, Edge, Safari */
+}
+
+.about-text {
+  font-size: 14px;
+  color: #555;
+  margin-top: 4px;
+}
+
+.profile-popup {
+  position: absolute;
+  top: 70px;
+  right: 20px;
+  background: white;
+  border-radius: 12px;
+  padding: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  z-index: 100;
+  width: 180px;
+  text-align: center;
+}
+
+.profile-popup button {
+  margin-top: 10px;
+  width: 100%;
+  padding: 8px;
+  border: none;
+  border-radius: 8px;
+  background: #ff6b9d;
+  color: white;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+/* Add this to your Dashboard.css file */
+
+.emotion-card.error {
+  border-color: #ff6b9d !important;
+  background: linear-gradient(135deg, #ffe6f0 0%, #fff0f5 100%) !important;
+  animation: shake 0.5s ease !important;
+}
+
+@keyframes shake {
+
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  25% {
+    transform: translateX(-5px);
+  }
+
+  75% {
+    transform: translateX(5px);
+  }
+}
+
+.emotion-card.active {
+  border-color: #26de81 !important;
+  background: linear-gradient(135deg, #e6fff0 0%, #f0fff5 100%) !important;
+  box-shadow: 0 12px 30px rgba(38, 222, 129, 0.3) !important;
+  transform: scale(1.05) !important;
+}
