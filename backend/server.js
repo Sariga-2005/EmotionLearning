@@ -7,13 +7,9 @@ require('dotenv').config();
 const app = express();
 
 // Middleware
-const allowedOrigins = [
-  'http://localhost:3000',
-  process.env.FRONTEND_URL
-].filter(Boolean);
-
+// Updated CORS for easy deployment
 app.use(cors({
-  origin: allowedOrigins.length > 0 ? allowedOrigins : '*',
+  origin: true,
   credentials: true
 }));
 app.use(express.json());
